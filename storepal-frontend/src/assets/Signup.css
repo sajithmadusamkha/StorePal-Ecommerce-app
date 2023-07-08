@@ -1,0 +1,13 @@
+.image_signup {
+    background-image: url(https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+    height: 90vh;
+    background-size: cover;
+}
+
+.signupContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+}
