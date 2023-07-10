@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const axios = require("axios");
 const cors = require("cors");
 const http = require("http");
 const server = http.createServer(app);
@@ -17,6 +16,7 @@ const userRoutes = require("./routes/userRoutes.js");
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use("/users", userRoutes);
 
 server.listen(process.env.PORT, () => {
   console.log("server running at port", process.env.PORT);
