@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
 
-const userSchema = new Schema(
+const UserSchema = mongoose.Schema(
   {
     name: {
       type: String,
       required: [true, "is required"],
     },
+
     email: {
       type: String,
       required: [true, "is required"],
@@ -20,14 +20,17 @@ const userSchema = new Schema(
         message: (props) => `${props.value} is not a valid email`,
       },
     },
+
     password: {
       type: String,
       required: [true, "is required"],
     },
+
     isAdmin: {
       type: Boolean,
       default: false,
     },
+
     cart: {
       type: Object,
       default: {
@@ -35,6 +38,7 @@ const userSchema = new Schema(
         count: 0,
       },
     },
+
     notifications: {
       type: Array,
       default: [],
@@ -45,23 +49,23 @@ const userSchema = new Schema(
   { minimize: false }
 );
 
-userSchema.statics.findByCredentials = async function (email, password) {
+UserSchema.statics.findByCredentials = async function (email, password) {
   const user = await User.findOne({ email });
-  if (!user) throw new Error("incorrect email");
+  if (!user) throw new Error("invalid credentials");
   const isSamePassword = bcrypt.compareSync(password, user.password);
   if (isSamePassword) return user;
-  throw new Error("incorrect password");
+  throw new Error("invalid credentials");
 };
 
-userSchema.methods.toJSON = function () {
+UserSchema.methods.toJSON = function () {
   const user = this;
   const userObject = user.toObject();
   delete userObject.password;
   return userObject;
 };
 
-//before saving the credentials we have to hash the passoword
-userSchema.pre("save", function (next) {
+//before saving => hash the password
+UserSchema.pre("save", function (next) {
   const user = this;
 
   if (!user.isModified("password")) return next();
@@ -78,8 +82,9 @@ userSchema.pre("save", function (next) {
   });
 });
 
-userSchema.pre("remove", function (next) {
+UserSchema.pre("remove", function (next) {
   this.model("Order").remove({ owner: this._id }, next);
 });
 
-module.exports = mongoose.model("User", userSchema);
+const User = mongoose.model("User", UserSchema);
+module.exports = User;

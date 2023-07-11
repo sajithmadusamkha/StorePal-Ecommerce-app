@@ -11,6 +11,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LockPersonOutlinedIcon from "@mui/icons-material/LockPersonOutlined";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useLoginMutation } from "../services/appApi";
+import { Alert } from "@mui/material";
 
 function Copyright(props) {
   return (
@@ -37,14 +39,11 @@ const defaultTheme = createTheme();
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [login, { isError, isLoading, error }] = useLoginMutation();
 
-  const handleSubmit = (event) => {
+  const handleLogin = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    login({ email, password });
   };
 
   return (
@@ -65,9 +64,10 @@ export default function Login() {
           <Typography component="h1" variant="h5">
             Log in
           </Typography>
+          {isError && <Alert severity="error">{error.data}</Alert>}
           <Box
             component="form"
-            onSubmit={handleSubmit}
+            onSubmit={handleLogin}
             noValidate
             sx={{ mt: 1 }}
           >
@@ -79,7 +79,6 @@ export default function Login() {
               label="Email Address"
               name="email"
               value={email}
-              autoComplete="email"
               autoFocus
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -92,7 +91,6 @@ export default function Login() {
               label="Password"
               type="password"
               id="password"
-              autoComplete="current-password"
               onChange={(e) => setPassword(e.target.value)}
             />
             <Button
@@ -100,6 +98,7 @@ export default function Login() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              disabled={isLoading}
             >
               Sign In
             </Button>

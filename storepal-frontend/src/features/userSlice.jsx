@@ -7,7 +7,9 @@ const initialState = null;
 export const userSlice = createSlice({
   name: "users",
   initialState,
-  reducers: {},
+  reducers: {
+    logout: () => initialState,
+  },
   extraReducers: (builder) => {
     builder.addMatcher(
       appApi.endpoints.signup.matchFulfilled,

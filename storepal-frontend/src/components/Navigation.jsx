@@ -1,10 +1,16 @@
 import React from "react";
 import { Navbar, Container, Nav, NavDropdown, Button } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
+import { logout } from "../features/userSlice";
+import "../assets/styles/Navigation.css";
 
 function Navigation() {
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  function handleLogout() {
+    dispatch(logout());
+  }
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
@@ -42,7 +48,11 @@ function Navigation() {
                   </>
                 )}
                 <NavDropdown.Divider />
-                <Button variant="danger" className="logout-btn">
+                <Button
+                  variant="danger"
+                  onClick={handleLogout}
+                  className="logout-btn"
+                >
                   Logout
                 </Button>
               </NavDropdown>
