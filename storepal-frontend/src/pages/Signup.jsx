@@ -3,13 +3,15 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LockPersonOutlinedIcon from "@mui/icons-material/LockPersonOutlined";
 import { useState } from "react";
+import { useSignupMutation } from "../services/appApi";
+import { Alert, Grid } from "@mui/material";
+import { Link } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -36,14 +38,12 @@ const defaultTheme = createTheme();
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [signup, { error, isLoading, isError }] = useSignupMutation();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    signup({ name, email, password });
   };
 
   return (
@@ -64,6 +64,7 @@ export default function Login() {
           <Typography component="h1" variant="h5">
             Create Account
           </Typography>
+          {isError && <Alert severity="error">{error.data}</Alert>}
           <Box
             component="form"
             onSubmit={handleSubmit}
@@ -74,11 +75,23 @@ export default function Login() {
               margin="normal"
               required
               fullWidth
+              id="name"
+              label="Name"
+              name="name"
+              value={name}
+              autoComplete="name"
+              autoFocus
+              onChange={(e) => setName(e.target.value)}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
               id="email"
               label="Email Address"
               name="email"
               value={email}
-              autoComplete="email"
+              autoComplete="password"
               autoFocus
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -99,9 +112,15 @@ export default function Login() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              disabled={isLoading}
             >
               Sign up
             </Button>
+            <Grid container>
+              <Grid item>
+                Do you have an account? <Link to="/login">Login</Link>{" "}
+              </Grid>
+            </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
