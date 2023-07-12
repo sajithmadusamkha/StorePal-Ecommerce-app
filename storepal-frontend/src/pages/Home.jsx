@@ -24,6 +24,13 @@ function Home() {
           </Link>
         </div>
       </div>
+      <div className="saleBanner">
+        <Image
+          className="sale-banner-img"
+          src={require("../assets/images/sale-banner.png")}
+          fluid
+        />
+      </div>
       <div className="recentProducts container mt-4">
         <h2>Categories</h2>
         <Row>
@@ -31,7 +38,7 @@ function Home() {
             <LinkContainer
               to={`/category/${category.name.toLocaleLowerCase()}`}
             >
-              <Col md={4}>
+              <Col md={3}>
                 <div
                   style={{
                     backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${category.img})`,

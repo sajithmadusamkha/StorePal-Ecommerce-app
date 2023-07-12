@@ -1,14 +1,18 @@
 const categories = [
   {
-    name: "Technology",
+    name: "Electronic",
     img: require("./assets/images/Technology-Products/logitech-headset.jpg"),
   },
   {
-    name: "Laptop",
+    name: "Computers",
     img: require("./assets/images/Technology-Products/Laptop.jpg"),
   },
   {
-    name: "Phone",
+    name: "Smart Home",
+    img: require("./assets/images/Technology-Products/samsungs22.jpg"),
+  },
+  {
+    name: "Arts & Crafts",
     img: require("./assets/images/Technology-Products/samsungs22.jpg"),
   },
 ];
