@@ -1,12 +1,22 @@
 import axios from "../axios";
 import React, { useEffect, useState } from "react";
-import { Badge, Col, Container, Row } from "react-bootstrap";
+import {
+  Badge,
+  Button,
+  ButtonGroup,
+  Col,
+  Container,
+  Form,
+  Row,
+} from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import AliceCarousel from "react-alice-carousel";
+import "react-alice-carousel/lib/alice-carousel.css";
 import Loading from "../components/Loading";
 import SimilarProduct from "../components/SimilarProduct";
 import "../assets/styles/ProductPage.css";
+import { LinkContainer } from "react-router-bootstrap";
 
 function ProductPage() {
   const { id } = useParams();
@@ -27,6 +37,12 @@ function ProductPage() {
   if (!product) {
     return <Loading />;
   }
+
+  const responsive = {
+    0: { items: 1 },
+    568: { items: 2 },
+    1024: { items: 3 },
+  };
 
   const images = product.images.map((picture) => (
     <img
@@ -65,8 +81,39 @@ function ProductPage() {
           <p style={{ textAlign: "justify" }} className="py-3">
             <strong>Description:</strong> {product.description}
           </p>
+          {user && !user.isAdmin && (
+            <ButtonGroup style={{ width: "90%" }}>
+              <Form.Select
+                size="lg"
+                style={{ width: "40%", borderRadius: "0" }}
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </Form.Select>
+              <Button size="lg">Add to cart</Button>
+            </ButtonGroup>
+          )}
+          {user && user.isAdmin && (
+            <LinkContainer to={`/product/${product._id}/edit`}>
+              <Button size="lg">Edit Product</Button>
+            </LinkContainer>
+          )}
         </Col>
       </Row>
+      <div className="my-4">
+        <h2>Similar Products</h2>
+        <div className="d-flex justify-content-center align-items-center flex-wrap">
+          <AliceCarousel
+            mouseTracking
+            items={similarProducts}
+            responsive={responsive}
+            controlsStrategy="alternate"
+          />
+        </div>
+      </div>
     </Container>
   );
 }
