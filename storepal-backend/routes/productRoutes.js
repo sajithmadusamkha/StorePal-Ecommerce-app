@@ -78,4 +78,21 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+//Get Category
+router.get("/category/:category", async (req, res) => {
+  const { category } = req.params;
+  try {
+    let products;
+    const sort = { _id: -1 };
+    if (category == "all") {
+      products = await Product.find().sort(sort);
+    } else {
+      products = await Product.find({ category }).sort(sort);
+    }
+    res.status(200).json(products);
+  } catch (e) {
+    res.status(400).send(e.message);
+  }
+});
+
 module.exports = router;
