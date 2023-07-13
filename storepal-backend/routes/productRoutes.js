@@ -5,6 +5,7 @@ const User = require("../models/User");
 // Get Product
 router.get("/", async (req, res) => {
   try {
+    const sort = { _id: -1 };
     const products = await Product.find().sort(sort);
     res.status(200).json(products);
   } catch (e) {

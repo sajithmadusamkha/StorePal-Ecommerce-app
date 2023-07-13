@@ -2,15 +2,7 @@ import React, { useState } from "react";
 import "../assets/styles/NewProduct.css";
 import { useNavigate } from "react-router-dom";
 import { useCreateProductMutation } from "../services/appApi";
-import {
-  Alert,
-  Button,
-  Col,
-  Container,
-  Form,
-  Image,
-  Row,
-} from "react-bootstrap";
+import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
 
 import "../assets/styles/NewProduct.css";
 import axios from "../axios";
@@ -77,7 +69,7 @@ function NewProduct() {
     <Container>
       <Row>
         <Col md={6} className="newProductForm-container">
-          <Form style={{ width: "100%" }}>
+          <Form style={{ width: "100%" }} onSubmit={handleSubmit}>
             <h1 className="mt-4">Create a product</h1>
 
             {isSuccess && (
