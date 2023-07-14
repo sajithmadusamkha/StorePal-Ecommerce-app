@@ -11,9 +11,11 @@ import ProductPage from "./pages/ProductPage";
 import CategoryPage from "./pages/CategoryPage";
 import ScrollToTop from "./components/ScrollToTop";
 import CartPage from "./pages/CartPage";
+import Orders from "./pages/Orders";
 
 function App() {
   const user = useSelector((state) => state.user);
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -31,6 +33,7 @@ function App() {
           {user && (
             <>
               <Route path="/cart" element={<CartPage />} />
+              <Route path="/orders" element={<Orders />} />
             </>
           )}
 

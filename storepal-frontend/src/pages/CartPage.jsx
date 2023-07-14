@@ -1,5 +1,6 @@
 import React from "react";
-import { Elements, loadStripe } from "@stripe/react-stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import { useSelector } from "react-redux";
 import { Alert, Col, Container, Row, Table } from "react-bootstrap";
 import {
