@@ -23,7 +23,7 @@
     transform: scale(1.05);
 }
 
-.saleBanner .sale-banner-img {
+.saleBanner {
     max-width: 1200px;
     display: block;
     margin: 0 auto;

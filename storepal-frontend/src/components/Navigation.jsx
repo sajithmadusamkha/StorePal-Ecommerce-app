@@ -25,6 +25,20 @@ function Navigation() {
                 <Nav.Link>Login</Nav.Link>
               </LinkContainer>
             )}
+
+            {user && !user.isAdmin && (
+              <LinkContainer to="/cart">
+                <Nav.Link>
+                  <i className="fas fa-shopping-cart"></i>
+                  {user?.cart.count > 0 && (
+                    <span className="badge badge-warning" id="cartcount">
+                      {user.cart.count}
+                    </span>
+                  )}
+                </Nav.Link>
+              </LinkContainer>
+            )}
+
             {user && (
               <NavDropdown title={`${user.email}`} id="basic-nav-dropdown">
                 {user.isAdmin && (
@@ -37,6 +51,7 @@ function Navigation() {
                     </LinkContainer>
                   </>
                 )}
+
                 {!user.isAdmin && (
                   <>
                     <LinkContainer to="/cart">
@@ -47,6 +62,7 @@ function Navigation() {
                     </LinkContainer>
                   </>
                 )}
+
                 <NavDropdown.Divider />
                 <Button
                   variant="danger"

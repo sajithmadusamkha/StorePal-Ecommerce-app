@@ -34,6 +34,7 @@ function Home() {
               textAlign: "right",
               display: "block",
               textDecoration: "none",
+              marginBottom: "10px",
             }}
           >
             See more{">>"}
