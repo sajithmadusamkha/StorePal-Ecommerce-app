@@ -22,11 +22,15 @@ function AdminDashboard() {
             </Nav>
           </Col>
           <Col sm={9}>
-            <Tab.Content eventKey="products">
-              <DashboardProducts />
+            <Tab.Content>
+              <Tab.Pane eventKey="products">
+                <DashboardProducts />
+              </Tab.Pane>
             </Tab.Content>
-            <Tab.Content eventKey="orders">
-              <OrdersAdminPage />
+            <Tab.Content>
+              <Tab.Pane eventKey="orders">
+                <OrdersAdminPage />
+              </Tab.Pane>
             </Tab.Content>
           </Col>
         </Row>
