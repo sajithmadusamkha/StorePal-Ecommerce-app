@@ -13,6 +13,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import CartPage from "./pages/CartPage";
 import Orders from "./pages/Orders";
 import AdminDashboard from "./pages/AdminDashboard";
+import EditProductPage from "./pages/EditProductPage";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -41,6 +42,7 @@ function App() {
           {user && user.isAdmin && (
             <>
               <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/product/:id/edit" element={<EditProductPage />} />
             </>
           )}
 

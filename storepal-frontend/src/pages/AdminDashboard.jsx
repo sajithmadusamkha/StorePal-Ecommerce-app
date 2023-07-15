@@ -1,6 +1,7 @@
 import React from "react";
 import { Col, Container, Nav, Row, Tab } from "react-bootstrap";
 import DashboardProducts from "./DashboardProducts";
+import OrdersAdminPage from "../components/OrdersAdminPage";
 
 function AdminDashboard() {
   return (
@@ -23,6 +24,9 @@ function AdminDashboard() {
           <Col sm={9}>
             <Tab.Content eventKey="products">
               <DashboardProducts />
+            </Tab.Content>
+            <Tab.Content eventKey="orders">
+              <OrdersAdminPage />
             </Tab.Content>
           </Col>
         </Row>
