@@ -15,6 +15,7 @@ const io = new Server(server, {
 const User = require("./models/User.js");
 const userRoutes = require("./routes/userRoutes.js");
 const productRoutes = require("./routes/productRoutes.js");
+const orderRoutes = require("./routes/OrderRoutes.js");
 const imageRoutes = require("./routes/imageRoutes.js");
 
 app.use(cors());
@@ -22,6 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/users", userRoutes);
 app.use("/products", productRoutes);
+app.use("/orders", orderRoutes);
 app.use("/images", imageRoutes);
 
 //Payment Endpoint
