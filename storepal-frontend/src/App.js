@@ -12,6 +12,7 @@ import CategoryPage from "./pages/CategoryPage";
 import ScrollToTop from "./components/ScrollToTop";
 import CartPage from "./pages/CartPage";
 import Orders from "./pages/Orders";
+import AdminDashboard from "./pages/AdminDashboard";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -34,6 +35,12 @@ function App() {
             <>
               <Route path="/cart" element={<CartPage />} />
               <Route path="/orders" element={<Orders />} />
+            </>
+          )}
+
+          {user && user.isAdmin && (
+            <>
+              <Route path="/admin" element={<AdminDashboard />} />
             </>
           )}
 
