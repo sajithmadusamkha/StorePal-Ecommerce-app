@@ -14,6 +14,7 @@ import CartPage from "./pages/CartPage";
 import Orders from "./pages/Orders";
 import AdminDashboard from "./pages/AdminDashboard";
 import EditProductPage from "./pages/EditProductPage";
+import Footer from "./components/Footer";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -48,9 +49,10 @@ function App() {
 
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/category/:category" element={<CategoryPage />} />
-          <Route path="/newproduct" element={<NewProduct />} />
+          <Route path="/new-product" element={<NewProduct />} />
           <Route path="*" element={<Home />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );

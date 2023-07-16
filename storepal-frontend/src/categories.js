@@ -8,12 +8,12 @@ const categories = [
     img: require("./assets/images/Technology-Products/Laptop.jpg"),
   },
   {
-    name: "Smart Home",
-    img: require("./assets/images/Technology-Products/samsungs22.jpg"),
+    name: "Smart-Home",
+    img: require("./assets/images/smart-home.jpg"),
   },
   {
-    name: "Arts & Crafts",
-    img: require("./assets/images/Technology-Products/samsungs22.jpg"),
+    name: "Arts-and-Crafts",
+    img: require("./assets/images/arts-and-crafts.jpg"),
   },
 ];
 
