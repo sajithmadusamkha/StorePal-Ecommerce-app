@@ -33,6 +33,20 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Delete User
+router.delete("/:id", async (req, res) => {
+  const { user_id } = req.body;
+  try {
+    const userId = await User.findById(user_id);
+    if (!userId.isAdmin) return res.status(401).json("You can't delete Users!");
+    await User.findByIdAndDelete(user_id);
+    const user = await User.find();
+    res.status(200).json(user);
+  } catch (e) {
+    res.status(400).send(e.message);
+  }
+});
+
 //Get User Orders
 router.get("/:id/orders", async (req, res) => {
   const { id } = req.params;
