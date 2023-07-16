@@ -39,10 +39,6 @@ export const userSlice = createSlice({
       appApi.endpoints.createOrder.matchFulfilled,
       (_, { payload }) => payload
     );
-    builder.addMatcher(
-      appApi.endpoints.deleteUser.matchFulfilled,
-      (_, { payload }) => payload
-    );
   },
 });
 

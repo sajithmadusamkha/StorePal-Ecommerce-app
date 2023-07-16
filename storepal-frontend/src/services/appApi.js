@@ -20,17 +20,6 @@ export const appApi = createApi({
       }),
     }),
 
-    //Delete User
-    deleteUser: builder.mutation({
-      query: ({ user_id }) => ({
-        url: `/users/${user_id}`,
-        body: {
-          user_id,
-        },
-        method: "DELETE",
-      }),
-    }),
-
     //Create product
     createProduct: builder.mutation({
       query: (product) => ({
@@ -118,7 +107,6 @@ export const {
   useCreateOrderMutation,
   useDeleteProductMutation,
   useUpdateProductMutation,
-  useDeleteUserMutation,
 } = appApi;
 
 export default appApi;

@@ -1,18 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "../axios";
 import Loading from "./Loading";
-import { Button, Table } from "react-bootstrap";
-import { useDeleteUserMutation } from "../services/appApi";
+import { Table } from "react-bootstrap";
 
 function ClientsAdminPage() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [deletUser, { isLoading, isSuccess }] = useDeleteUserMutation();
-
-  function handleDeleteUser(id) {
-    if (window.confirm("Are you sure?")) deletUser({ user_id: id });
-  }
-
   useEffect(() => {
     setLoading(true);
     axios
@@ -46,15 +39,6 @@ function ClientsAdminPage() {
             <td>{user._id}</td>
             <td>{user.name}</td>
             <td>{user.email}</td>
-            <td>
-              <Button
-                disabled={isLoading}
-                className="me-2"
-                onClick={() => handleDeleteUser(user._id)}
-              >
-                Delete
-              </Button>
-            </td>
           </tr>
         ))}
       </tbody>
